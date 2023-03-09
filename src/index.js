@@ -29,7 +29,7 @@ app.use(passport.session());
 
 const userRouter = require("./routes/userauth_route");
 
-// app.use("/api/user", userRouter);
+app.use("/api/user", userRouter);
 
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 

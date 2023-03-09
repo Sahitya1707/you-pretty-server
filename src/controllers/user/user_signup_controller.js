@@ -37,7 +37,7 @@ const userSignUp = async (req, res) => {
       service: "Gmail",
       auth: {
         user: "chandant142@gmail.com",
-        pass: "548552simsim",
+        pass: "qezvtafegssrwrne",
       },
       logger: true,
     });
@@ -49,7 +49,7 @@ const userSignUp = async (req, res) => {
       text: "please verify your email",
       html: `
                    <p>click on the link to verify the email</p>
-                   <a href='http://localhost:4200/activate-user/${signUpToken}'>click here</a>
+                   <a href='http://localhost:3000/activate-user/${signUpToken}'>click here</a>
               `,
       headers: { "x-myheader": "test header" },
     });
