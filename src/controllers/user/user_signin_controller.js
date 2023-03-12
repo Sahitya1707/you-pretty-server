@@ -1,17 +1,17 @@
 const bcrypt = require("bcryptjs");
-const jwt = require('jsonwebtoken')
-const User = require('../../models/user_schema')
+const jwt = require("jsonwebtoken");
+const User = require("../../models/user_schema");
 
 const JWT_SECRET = "userChandan123";
 
 const userSignIn = async (req, res) => {
   try {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res
-      .status(201)
-      .json({ error: "please enter all the required fields" });
-  }
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res
+        .status(201)
+        .json({ error: "please enter all the required fields" });
+    }
 
     const isUserExists = await User.findOne({ email: email });
     if (!isUserExists) {
@@ -41,10 +41,15 @@ const userSignIn = async (req, res) => {
         //   user_jwt: token,
         // };
 
-        const {firstName, lastName, email } = isUserExists;
+        const { firstName, lastName, email, role } = isUserExists;
         res
           .status(200)
-          .json({token, user: {firstName, lastName, email },message:'login successfull.'});
+          .json({
+            token,
+            role,
+            user: { firstName, lastName, email },
+            message: "login successfull.",
+          });
       }
     }
   } catch (error) {

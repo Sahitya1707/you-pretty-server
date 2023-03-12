@@ -11,20 +11,30 @@ const authenticateUser = (req, res, next) => {
         message: "token doesn't exist or might be wrong.",
       });
     }
-      const payload = jwt.verify(userToken,JWT_SECRET);
-      const { _id } = payload;
-      User.findById(_id)
-        .then((userData) => {
-          req.user = userData; 
+    const payload = jwt.verify(userToken, JWT_SECRET);
+    const { _id } = payload;
+    User.findById(_id)
+      .then((userData) => {
+        if (userData.role === "user") {
+          req.user = userData;
           next();
-        })
-        .catch((err) => {
-          console.log(err);
+        } else if (userData.role === "admin") {
+          req.admin = userData;
+          next();
+        } else {
           return res.status(200).json({
             login: false,
             message: "token doesn't exist or might be wrong.",
           });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(200).json({
+          login: false,
+          message: "token doesn't exist or might be wrong.",
         });
+      });
   } catch (error) {
     return res.status(200).json({
       login: false,
