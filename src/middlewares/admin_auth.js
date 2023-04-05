@@ -19,4 +19,4 @@ const authenticateAdmin = (req, res, next) => {
     });
 };
 
-export { authenticateAdmin };
+module.exports = authenticateAdmin;

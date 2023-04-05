@@ -41,15 +41,13 @@ const userSignIn = async (req, res) => {
         //   user_jwt: token,
         // };
 
-        const { firstName, lastName, email, role } = isUserExists;
-        res
-          .status(200)
-          .json({
-            token,
-            role,
-            user: { firstName, lastName, email },
-            message: "login successfull.",
-          });
+        const { _id, firstName, lastName, email, role } = isUserExists;
+        res.status(200).json({
+          token,
+          role,
+          user: { firstName, lastName, email, _id },
+          message: "login successfull.",
+        });
       }
     }
   } catch (error) {
